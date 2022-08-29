@@ -1,4 +1,5 @@
-﻿using InfSecIdentity.Services.UserService;
+﻿using InfSecIdentity.Models.Requests;
+using InfSecIdentity.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace InfSecIdentity.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        public static User user = new User();
+        public static Users user = new Users();
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
 
@@ -31,7 +32,7 @@ namespace InfSecIdentity.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<ActionResult<Users>> Register(UserDto request)
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 

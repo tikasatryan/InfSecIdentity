@@ -1,5 +1,6 @@
 ﻿using InfSecIdentity.Models.Requests;
 using InfSecIdentity.Services.UserService;
+using InfSecIdentity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -73,7 +74,7 @@ namespace InfSecIdentity.Controllers
             {
                 return Unauthorized("Invalid Refresh Token.");
             }
-            else if(user.TokenExpires < DateTime.Now)
+            else if (user.TokenExpires < DateTime.Now)
             {
                 return Unauthorized("Token expired.");
             }
@@ -111,7 +112,7 @@ namespace InfSecIdentity.Controllers
             user.TokenExpires = newRefreshToken.Expires;
         }
 
-        private string CreateToken(User user)
+        private string CreateToken(Users user)
         {
             List<Claim> claims = new List<Claim>
             {
